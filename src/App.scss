@@ -1,15 +1,29 @@
+
 .App {
-background-color: lightblue;
+background-color: #8C8E91;
 height: 100vh;
 display:grid;
 grid-template-columns: 200px 1fr;
+a {  
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  &.active{
+    color: #96C4F9;
+  }
+}
+
 .sidebar{
-  background-color: lightcoral;
+  background-color: #B8BBBE;
   .grid{
       display: grid;
-      gap: 20px;
-      justify-content: center;
+      gap: 8px;
       align-items: center;
+      padding:8px;
+      div {
+        margin-top:4px
+      }
+
   }
  }
 }
