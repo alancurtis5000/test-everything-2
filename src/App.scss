@@ -1,0 +1,15 @@
+.App {
+background-color: lightblue;
+height: 100vh;
+display:grid;
+grid-template-columns: 200px 1fr;
+.sidebar{
+  background-color: lightcoral;
+  .grid{
+      display: grid;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+  }
+ }
+}
