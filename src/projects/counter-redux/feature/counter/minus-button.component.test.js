@@ -1,21 +1,26 @@
-// We're using our own custom render function for redux conneceted compoenentsand not RTL's render
-import { render, cleanup } from '../../../tests/test.utils';
-import ExampleCounterMinus from './example-counter-minus.component';
+// We're using our own custom render function for redux conneceted components and not RTL's render
+import { render, cleanup, screen } from '../../tests/test.utils';
+import MinusButton from './minus-button.component';
 
-describe('ExampleCounterMinus', () => {
-  beforeEach(() => {});
-
+describe('MinusButton', () => {
   afterEach(cleanup);
 
-  it('should render', () => {
-    const component = render(<ExampleCounterMinus />);
-    expect(component).toBeDefined();
+  describe('Default State', () => {
+    beforeEach(() => {
+      render(<MinusButton />);
+    });
+    it('should render display "Minus" text', () => {
+      expect(screen.getByText('Minus')).toBeDefined();
+    });
   });
 
-  it('should be disabled if margin is 0', () => {
-    const preloadedState = { exampleCounter: { count: 0, margin: 0 } };
-    const { getByTestId } = render(<ExampleCounterMinus />, { preloadedState });
-    const button = getByTestId('minus');
-    expect(button).toBeDisabled();
+  describe('Altered State', () => {
+    const preloadedState = { counter: { count: 0, margin: 0 } };
+    beforeEach(() => {
+      render(<MinusButton />, { preloadedState });
+    });
+    it('should show disabled "Minus" Button', () => {
+      expect(screen.getByTestId('minus')).toBeDisabled();
+    });
   });
 });
