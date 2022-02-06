@@ -1,3 +1,4 @@
+import React from 'react';
 import { Route, Routes, NavLink } from 'react-router-dom';
 import './App.scss';
 import TestProjectA from './projects/test-project-a/test-project-a.app';
@@ -13,6 +14,29 @@ const theme = createTheme({
   },
 });
 
+const projects = [
+  { name: 'TestProjectA', element: <TestProjectA /> },
+  { name: 'TestProjectB', element: <TestProjectB /> },
+];
+
+let navButtons = [];
+let routes = [];
+
+projects.forEach((project) => {
+  const { name, element } = project;
+  let button = (
+    <NavLink to={`/${name}`} key={name}>
+      <Button variant="contained" fullWidth>
+        {name}
+      </Button>
+    </NavLink>
+  );
+  navButtons.push(button);
+
+  let route = <Route path={`/${name}`} element={element} key={name} />;
+  routes.push(route);
+});
+
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
@@ -22,18 +46,10 @@ const App = () => {
             <Typography variant="h5" component="div">
               Projects
             </Typography>
-            <Button variant="contained">
-              <NavLink to="/">Test Project A</NavLink>
-            </Button>
-            <Button variant="contained">
-              <NavLink to="/TestProjectB">Test Project B</NavLink>
-            </Button>
+            {navButtons}
           </div>
         </div>
-        <Routes>
-          <Route exact path="/" element={<TestProjectA />} />
-          <Route path="/TestProjectB" element={<TestProjectB />} />
-        </Routes>
+        <Routes>{routes}</Routes>
       </div>
     </ThemeProvider>
   );

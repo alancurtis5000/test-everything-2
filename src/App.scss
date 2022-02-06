@@ -5,12 +5,20 @@ height: 100vh;
 display:grid;
 grid-template-columns: 200px 1fr;
 a {  
-  color: white;
-  font-weight: bold;
   text-decoration: none;
+  color: white;
+  font-weight:bold;
   &.active{
     color: #96C4F9;
+    button{
+      color: #96C4F9;
+      font-weight:bold;
+    }
   }
+  button {
+    font-weight:bold;
+  }
+
 }
 
 .sidebar{
