@@ -11,6 +11,7 @@ const AddButton = () => {
       variant="contained"
       onClick={() => dispatch(counterIncrement())}
       data-testid="add"
+      fullWidth
       disabled={margin === 0}
     >
       Add

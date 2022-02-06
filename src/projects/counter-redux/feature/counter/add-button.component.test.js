@@ -9,7 +9,7 @@ describe('AddButton', () => {
     beforeEach(() => {
       render(<AddButton />);
     });
-    it('should render display "Add" text', () => {
+    it('should show "Add" text', () => {
       expect(screen.getByText('Add')).toBeDefined();
     });
   });

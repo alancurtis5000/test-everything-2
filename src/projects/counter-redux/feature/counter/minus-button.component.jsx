@@ -12,6 +12,7 @@ const MinusButton = () => {
       onClick={() => dispatch(counterDecrement())}
       data-testid="minus"
       disabled={margin === 0}
+      fullWidth
       color="warning"
     >
       Minus
