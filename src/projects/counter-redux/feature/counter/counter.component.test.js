@@ -1,31 +1,27 @@
 // We're using our own custom render function for redux conneceted compoenentsand not RTL's render
-import { render, cleanup, fireEvent } from "../../tests/test.utils";
+import { render, cleanup, fireEvent, screen } from "../../tests/test.utils";
 // this is import from testing-library base.
-// import { render, cleanup } from "@testing-library/react";
-import ExampleCounter from "./example-counter.component";
+import Counter from "./counter.component";
 
-describe("ExampleCounter", () => {
-  beforeEach(() => {});
+  // TODO: go through this test and convert it to use screen and one render. reorginize.
+
+describe("Counter", () => {
+ // beforeEach(() => { render(<Counter />)});
 
   afterEach(cleanup);
 
-  it("should render", () => {
-    const component = render(<ExampleCounter />);
-    expect(component).toBeDefined();
-  });
-
   it("should render with ititialState from Redux store", () => {
-    const { getByTestId } = render(<ExampleCounter />);
+    const { getByTestId } = render(<Counter />);
     const count = getByTestId("count").textContent;
     expect(count).toBe("0");
   });
 
   it("should render with preloadedState / override intialState of redux store from Redux store", () => {
-    const preloadedState = { exampleCounter: { count: 10, margin: 5 } };
-    const { getByTestId } = render(<ExampleCounter />, {
+    const preloadedState = { counter: { count: 10, margin: 5 } };
+    const { getByTestId } = render(<Counter />, {
       preloadedState,
     });
-    let count = getByTestId("count").textContent;
+    let count = screen.getByTestId("count").textContent;
     expect(count).toBe("10");
     fireEvent.click(getByTestId("add"));
     count = getByTestId("count").textContent;
@@ -33,7 +29,7 @@ describe("ExampleCounter", () => {
   });
 
   it("should dispatch action increment on button click", () => {
-    const { getByTestId } = render(<ExampleCounter />);
+    const { getByTestId } = render(<Counter />);
     fireEvent.click(getByTestId("add"));
     const count = getByTestId("count").textContent;
     expect(count).toBe("1");
@@ -41,21 +37,21 @@ describe("ExampleCounter", () => {
 
   // alternatively you can find by text
   it("should dispatch action increment on button click find by text", () => {
-    const { getByText, getByTestId } = render(<ExampleCounter />);
+    const { getByText, getByTestId } = render(<Counter />);
     fireEvent.click(getByText("Add"));
     const count = getByTestId("count").textContent;
     expect(count).toBe("1");
   });
 
   it("should dispatch an action decrement on button click", () => {
-    const { getByTestId } = render(<ExampleCounter />);
+    const { getByTestId } = render(<Counter />);
     fireEvent.click(getByTestId("minus"));
     const count = getByTestId("count").textContent;
     expect(count).toBe("-1");
   });
 
   it("should dispatch an action reset on button click", () => {
-    const { getByTestId } = render(<ExampleCounter />);
+    const { getByTestId } = render(<Counter />);
     fireEvent.click(getByTestId("reset"));
     const count = getByTestId("count").textContent;
     expect(count).toBe("0");
@@ -64,7 +60,7 @@ describe("ExampleCounter", () => {
   });
 
   it("should change input margin", () => {
-    const { getByTestId } = render(<ExampleCounter />);
+    const { getByTestId } = render(<Counter />);
     const input = getByTestId("margin");
     fireEvent.change(input, { target: { value: 4 } });
     const result = input.value;
@@ -72,7 +68,7 @@ describe("ExampleCounter", () => {
   });
 
   it("should not allow letters to be inputted", () => {
-    const { getByTestId } = render(<ExampleCounter />);
+    const { getByTestId } = render(<Counter />);
     const input = getByTestId("margin");
     expect(input.value).toBe("1"); // default value
     fireEvent.change(input, { target: { value: "Good Day" } });
@@ -80,7 +76,7 @@ describe("ExampleCounter", () => {
   });
 
   it("should change margin and update count on button push", () => {
-    const { getByTestId } = render(<ExampleCounter />);
+    const { getByTestId } = render(<Counter />);
     // intial state before
     const input = getByTestId("margin");
     expect(input.value).toBe("1");
@@ -97,7 +93,7 @@ describe("ExampleCounter", () => {
 
   // multiple actions
   it("should handle multiple changes, update margin add multiple times and minus multiple times , then reset", () => {
-    const { getByTestId } = render(<ExampleCounter />);
+    const { getByTestId } = render(<Counter />);
 
     let count = getByTestId("count").textContent;
     const marginInput = getByTestId("margin");
