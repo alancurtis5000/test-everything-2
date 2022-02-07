@@ -9,7 +9,6 @@ describe('MarginInput', () => {
     beforeEach(() => {
       render(<MarginInput />);
     });
-    afterEach(cleanup);
     it('should show margin value at 1', () => {
       expect(screen.getByTestId('margin')).toHaveValue(1);
     });
@@ -18,6 +17,18 @@ describe('MarginInput', () => {
       expect(textField).toHaveValue(1);
       fireEvent.change(textField, { target: { value: '3' } });
       expect(textField).toHaveValue(3);
+    });
+    it('should not have an error', () => {
+      expect(screen.queryByText('Cannot have margin of 0')).toBeNull();
+    });
+  });
+  describe('Altered State', () => {
+    beforeEach(() => {
+      const preloadedState = { counter: { count: 0, margin: 0 } };
+      render(<MarginInput />, preloadedState);
+    });
+    it('should show Error Message', () => {
+      expect(screen.queryByText('Cannot have margin of 0')).toBeDefined();
     });
   });
 });

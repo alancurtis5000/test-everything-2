@@ -14,6 +14,8 @@ const MarginInput = () => {
       onChange={(e) => dispatch(counterUpdateMargin(e.target.value * 1))}
       // for testing testid gets passed as input props
       inputProps={{ 'data-testid': 'margin' }}
+      error={margin === 0}
+      helperText={margin === 0 ? 'Cannot have margin of 0' : null}
     />
   );
 };
