@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import * as actions from './api-call.actions';
 import types from './api-call.types';
+import * as fixtures from './__test__/api-call.fixtures';
 
 // Note: when testing actions we only want to test the action
 // and payload being create so we use a mock store
@@ -26,14 +27,7 @@ describe('apiCall Actions', () => {
   it('should get data start and get data success', (done) => {
     const response = {
       status: 200,
-      response: {
-        quotes: [
-          {
-            text: "My father wasn't really involved and my mom is the light in my life.",
-            author: 'Marion Jones',
-          },
-        ],
-      },
+      response: fixtures.fakeApiCallSuccess,
     };
 
     moxios.wait(() => {

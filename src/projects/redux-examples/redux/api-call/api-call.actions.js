@@ -16,7 +16,6 @@ export const getDataFailure = (errorMessage) => ({
 });
 
 export const getData = () => async (dispatch) => {
-  console.log('started');
   dispatch(getDataStart());
   return axios
     .get('https://zzzzzzgoquotes-api.herokuapp.com/api/v1/random?count=1')
