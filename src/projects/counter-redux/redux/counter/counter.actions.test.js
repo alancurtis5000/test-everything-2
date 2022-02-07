@@ -14,7 +14,7 @@ const mockStore = configureMockStore(middlewares);
 describe('counterActions', () => {
   let store;
   beforeEach(() => {
-    store = mockStore({ exampleCounter: { count: 0, margin: 1 } });
+    store = mockStore({ counter: { count: 0, margin: 1 } });
   });
 
   afterEach(cleanup);
@@ -27,26 +27,24 @@ describe('counterActions', () => {
   it('increment action fired', () => {
     const expectedActions = [
       {
-        type: types.EXAMPLE_COUNTER_INCREMENT,
-        payload: { count: 1 },
+        type: types.COUNTER_INCREMENT,
       },
     ];
-    store.dispatch(actions.exampleCounterIncrement());
+    store.dispatch(actions.counterIncrement());
     expect(store.getActions()).toEqual(expectedActions);
   });
 
   it('increment action fired with different margin', () => {
     // using storeOverride to have a diffent default state
     let storeOverride = mockStore({
-      exampleCounter: { count: 0, margin: 4 },
+      counter: { count: 0, margin: 4 },
     });
     const expectedActions = [
       {
-        type: types.EXAMPLE_COUNTER_INCREMENT,
-        payload: { count: 4 },
+        type: types.COUNTER_INCREMENT,
       },
     ];
-    storeOverride.dispatch(actions.exampleCounterIncrement());
+    storeOverride.dispatch(actions.counterIncrement());
     expect(storeOverride.getActions()).toEqual(expectedActions);
   });
 
@@ -54,11 +52,10 @@ describe('counterActions', () => {
   it('decrements 1', () => {
     const expectedActions = [
       {
-        type: types.EXAMPLE_COUNTER_DECREMENT,
-        payload: { count: -1 },
+        type: types.COUNTER_DECREMENT,
       },
     ];
-    store.dispatch(actions.exampleCounterDecrement());
+    store.dispatch(actions.counterDecrement());
     expect(store.getActions()).toEqual(expectedActions);
   });
 
@@ -66,10 +63,10 @@ describe('counterActions', () => {
   it('reset', () => {
     const expectedActions = [
       {
-        type: types.EXAMPLE_COUNTER_RESET,
+        type: types.COUNTER_RESET,
       },
     ];
-    store.dispatch(actions.exampleCounterReset());
+    store.dispatch(actions.counterReset());
     expect(store.getActions()).toEqual(expectedActions);
   });
 
@@ -78,22 +75,22 @@ describe('counterActions', () => {
     const updatedMargin = 4;
     const expectedActions = [
       {
-        type: types.EXAMPLE_COUNTER_UPDATE_MARGIN,
+        type: types.COUNTER_UPDATE_MARGIN,
         payload: { margin: updatedMargin },
       },
     ];
-    store.dispatch(actions.exampleCounterUpdateMargin(updatedMargin));
+    store.dispatch(actions.counterUpdateMargin(updatedMargin));
     expect(store.getActions()).toEqual(expectedActions);
   });
   it('updates margin by negitive number', () => {
     const updatedMargin = -6;
     const expectedActions = [
       {
-        type: types.EXAMPLE_COUNTER_UPDATE_MARGIN,
+        type: types.COUNTER_UPDATE_MARGIN,
         payload: { margin: updatedMargin },
       },
     ];
-    store.dispatch(actions.exampleCounterUpdateMargin(updatedMargin));
+    store.dispatch(actions.counterUpdateMargin(updatedMargin));
     expect(store.getActions()).toEqual(expectedActions);
   });
 });
