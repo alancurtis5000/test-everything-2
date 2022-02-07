@@ -1,9 +1,9 @@
 import { cleanup } from '../../tests/test.utils';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-
-import * as actions from './counter.actions';
-import types from './counter.types';
+import moxios from 'moxios';
+import * as actions from './api-call.actions';
+import types from './api-call.types';
 
 // Note: when testing actions we only want to test the action
 // and payload being create so we use a mock store
@@ -11,86 +11,72 @@ import types from './counter.types';
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('counterActions', () => {
+describe('apiCall Actions', () => {
   let store;
   beforeEach(() => {
-    store = mockStore({ counter: { count: 0, margin: 1 } });
+    store = mockStore({ apiCall: { data: {}, isLoaded: false, error: '' } });
+    moxios.install();
   });
 
-  afterEach(cleanup);
-
-  it('test run', () => {
-    expect(true).toEqual(true);
+  afterEach(() => {
+    moxios.uninstall();
+    cleanup;
   });
 
-  // INCREMENT //
-  it('increment action fired', () => {
-    const expectedActions = [
-      {
-        type: types.COUNTER_INCREMENT,
+  it('should get data start and get data success', (done) => {
+    const response = {
+      status: 200,
+      response: {
+        quotes: [
+          {
+            text: "My father wasn't really involved and my mom is the light in my life.",
+            author: 'Marion Jones',
+          },
+        ],
       },
-    ];
-    store.dispatch(actions.counterIncrement());
-    expect(store.getActions()).toEqual(expectedActions);
-  });
+    };
 
-  it('increment action fired with different margin', () => {
-    // using storeOverride to have a diffent default state
-    let storeOverride = mockStore({
-      counter: { count: 0, margin: 4 },
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith(response);
     });
+
+    const payload = { data: response.response.quotes[0] };
+
     const expectedActions = [
-      {
-        type: types.COUNTER_INCREMENT,
-      },
+      { type: types.GET_DATA_START },
+      { type: types.GET_DATA_SUCCESS, payload },
     ];
-    storeOverride.dispatch(actions.counterIncrement());
-    expect(storeOverride.getActions()).toEqual(expectedActions);
+
+    store.dispatch(actions.getData()).then(() => {
+      const actualActions = store.getActions();
+      expect(actualActions).toEqual(expectedActions);
+      done();
+    });
   });
 
-  // DECREMENT //
-  it('decrements 1', () => {
-    const expectedActions = [
-      {
-        type: types.COUNTER_DECREMENT,
-      },
-    ];
-    store.dispatch(actions.counterDecrement());
-    expect(store.getActions()).toEqual(expectedActions);
-  });
+  it('should get data start and get data failure', (done) => {
+    const error = {
+      status: 404,
+      message: 'Network Error',
+    };
 
-  // RESET //
-  it('reset', () => {
-    const expectedActions = [
-      {
-        type: types.COUNTER_RESET,
-      },
-    ];
-    store.dispatch(actions.counterReset());
-    expect(store.getActions()).toEqual(expectedActions);
-  });
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.reject(error);
+    });
 
-  // MARGIN //
-  it('updates margin', () => {
-    const updatedMargin = 4;
+    const payload = { error: error.message };
+
     const expectedActions = [
-      {
-        type: types.COUNTER_UPDATE_MARGIN,
-        payload: { margin: updatedMargin },
-      },
+      { type: types.GET_DATA_START },
+      { type: types.GET_DATA_FAILURE, payload },
     ];
-    store.dispatch(actions.counterUpdateMargin(updatedMargin));
-    expect(store.getActions()).toEqual(expectedActions);
-  });
-  it('updates margin by negitive number', () => {
-    const updatedMargin = -6;
-    const expectedActions = [
-      {
-        type: types.COUNTER_UPDATE_MARGIN,
-        payload: { margin: updatedMargin },
-      },
-    ];
-    store.dispatch(actions.counterUpdateMargin(updatedMargin));
-    expect(store.getActions()).toEqual(expectedActions);
+
+    store.dispatch(actions.getData()).then(() => {
+      const actualActions = store.getActions();
+      expect(actualActions).toEqual(expectedActions);
+      done();
+    });
   });
 });
