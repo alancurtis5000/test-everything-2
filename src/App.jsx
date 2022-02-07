@@ -3,7 +3,7 @@ import { Route, Routes, NavLink } from 'react-router-dom';
 import './App.scss';
 import TestProjectA from './projects/test-project-a/test-project-a.app';
 import TestProjectB from './projects/test-project-b/test-project-b.app';
-import CounterReduxApp from './projects/counter-redux/counter-redux.app';
+import ReduxExamplesApp from './projects/redux-examples/redux-examples.app';
 import { Button, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -18,7 +18,7 @@ const theme = createTheme({
 const projects = [
   { name: 'TestProjectA', element: <TestProjectA /> },
   { name: 'TestProjectB', element: <TestProjectB /> },
-  { name: 'CounterReduxApp', element: <CounterReduxApp /> },
+  { name: 'ReduxExamplesApp', element: <ReduxExamplesApp /> },
 ];
 
 let navButtons = [];
@@ -38,6 +38,11 @@ projects.forEach((project) => {
   let route = <Route path={`/${name}`} element={element} key={name} />;
   routes.push(route);
 });
+
+const baseRoute = (
+  <Route path={`/`} element={<ReduxExamplesApp />} key={'ReduxExamplesApp'} />
+);
+routes.push(baseRoute);
 
 const App = () => {
   return (

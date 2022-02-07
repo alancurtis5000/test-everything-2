@@ -9,6 +9,7 @@ describe('MarginInput', () => {
     beforeEach(() => {
       render(<MarginInput />);
     });
+    afterEach(cleanup);
     it('should show margin value at 1', () => {
       expect(screen.getByTestId('margin')).toHaveValue(1);
     });

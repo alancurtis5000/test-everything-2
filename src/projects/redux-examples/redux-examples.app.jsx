@@ -8,13 +8,13 @@ import configureStore from './redux/configure-store';
 const store = configureStore();
 const theme = createTheme({});
 
-const CounterReduxApp = () => {
+const ReduxExamplesApp = () => {
   return (
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <div className="CounterReduxApp">
+        <div className="ReduxExamplesApp">
           <Typography variant="h5" component="div">
-            Counter Redux
+            Redux Examples
           </Typography>
           <Counter />
         </div>
@@ -23,4 +23,4 @@ const CounterReduxApp = () => {
   );
 };
 
-export default CounterReduxApp;
+export default ReduxExamplesApp;
