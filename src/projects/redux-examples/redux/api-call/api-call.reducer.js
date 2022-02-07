@@ -11,7 +11,7 @@ const apiCallReducer = (state = initialState, action) => {
     case types.GET_DATA_START:
       return { ...state, isLoaded: false };
     case types.GET_DATA_SUCCESS:
-      return { ...state, ...action.payload, isLoaded: true };
+      return { ...state, ...action.payload, isLoaded: true, error: '' };
     case types.GET_DATA_FAILURE:
       return { ...state, ...action.payload, isLoaded: true };
     default:
