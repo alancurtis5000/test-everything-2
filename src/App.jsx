@@ -15,6 +15,7 @@ const theme = createTheme({
   },
 });
 
+// anytime you want to add a new project add it to the project list.
 const projects = [
   { name: 'TestProjectA', element: <TestProjectA /> },
   { name: 'TestProjectB', element: <TestProjectB /> },

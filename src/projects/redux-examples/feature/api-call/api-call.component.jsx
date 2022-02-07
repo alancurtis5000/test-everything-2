@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { getData } from '../../redux/api-call/api-call.actions';
 import Content from './content.component';
 
+// TODO: Alan write test for these components api call and children comps
 const APICall = () => {
   const dispatch = useDispatch();
 
