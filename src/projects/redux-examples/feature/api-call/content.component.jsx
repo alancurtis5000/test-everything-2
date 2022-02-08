@@ -10,14 +10,22 @@ const Content = () => {
     switch (true) {
       case !isLoaded:
         return (
-          <Typography variant="h6" component="div">
+          <Typography variant="h6" component="div" data-testid="loading">
             ...Loading...
           </Typography>
         );
       case !!error:
-        return <Alert severity="error">{error}</Alert>;
+        return (
+          <Alert data-testid="alert" severity="error">
+            {error}
+          </Alert>
+        );
       default:
-        return text;
+        return (
+          <Typography variant="subtitle1" component="div" data-testid="quote">
+            {text}
+          </Typography>
+        );
     }
   };
 
@@ -26,9 +34,7 @@ const Content = () => {
       <Typography variant="h6" component="div">
         Quote:
       </Typography>
-      <Typography variant="subtitle1" component="div">
-        {whatToRender()}
-      </Typography>
+      {whatToRender()}
       <Box
         sx={{
           display: 'flex',
@@ -39,9 +45,16 @@ const Content = () => {
         <Typography variant="h6" component="div">
           Author:
         </Typography>
-        <Typography variant="h6" component="div" sx={{ marginLeft: '6px' }}>
-          {author}
-        </Typography>
+        {author && (
+          <Typography
+            data-testid="author"
+            variant="h6"
+            component="div"
+            sx={{ marginLeft: '6px' }}
+          >
+            {author}
+          </Typography>
+        )}
       </Box>
     </Container>
   );
