@@ -60,7 +60,8 @@
       "./public/",
       "./.vscode/",
       "./src/reportWebVitals.js",
-      "./src/index.js"
+      "./src/index.js",
+      "__test__"
     ]
   }
 }
