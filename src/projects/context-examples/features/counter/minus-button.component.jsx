@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 import { useContext } from 'react';
-import { CounterContext } from '../../providers/counter-context.provider';
+import { CounterContext } from '../../providers/counter.provider';
 
 const MinusButton = () => {
   const { decrement, margin } = useContext(CounterContext);

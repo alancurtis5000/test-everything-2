@@ -1,9 +1,8 @@
 import { TextField } from '@mui/material';
 import { useContext } from 'react';
-import { CounterContext } from '../../providers/counter-context.provider';
+import { CounterContext } from '../../providers/counter.provider';
 
 const MarginInput = () => {
-  const dispatch = useDispatch();
   const { margin, updateMargin } = useContext(CounterContext);
   return (
     <TextField
