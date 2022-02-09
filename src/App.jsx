@@ -4,6 +4,7 @@ import './App.scss';
 import TestProjectA from './projects/test-project-a/test-project-a.app';
 import TestProjectB from './projects/test-project-b/test-project-b.app';
 import ReduxExamplesApp from './projects/redux-examples/redux-examples.app';
+import ContextExamplesApp from './projects/context-examples/context-examples.app';
 import { Button, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -20,6 +21,7 @@ const projects = [
   { name: 'TestProjectA', element: <TestProjectA /> },
   { name: 'TestProjectB', element: <TestProjectB /> },
   { name: 'ReduxExamplesApp', element: <ReduxExamplesApp /> },
+  { name: 'ContextExamplesApp', element: <ContextExamplesApp /> },
 ];
 
 let navButtons = [];
