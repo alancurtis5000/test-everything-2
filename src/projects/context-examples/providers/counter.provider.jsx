@@ -26,9 +26,9 @@ const CounterContextProvider = ({ children }) => {
   };
 
   // if count changes do something
-  useEffect(() => {
-    console.log({ count });
-  }, [count]);
+  // useEffect(() => {
+  //   console.log({ count });
+  // }, [count]);
 
   return (
     <CounterContext.Provider
