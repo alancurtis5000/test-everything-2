@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes, NavLink } from 'react-router-dom';
 import './App.scss';
 import TestProjectA from './projects/test-project-a/test-project-a.app';
-import TestProjectB from './projects/test-project-b/test-project-b.app';
 import ReduxExamplesApp from './projects/redux-examples/redux-examples.app';
 import ContextExamplesApp from './projects/context-examples/context-examples.app';
 import { Button, Typography } from '@mui/material';
@@ -19,7 +18,6 @@ const theme = createTheme({
 // anytime you want to add a new project add it to the project list.
 const projects = [
   { name: 'TestProjectA', element: <TestProjectA /> },
-  { name: 'TestProjectB', element: <TestProjectB /> },
   { name: 'ReduxExamplesApp', element: <ReduxExamplesApp /> },
   { name: 'ContextExamplesApp', element: <ContextExamplesApp /> },
 ];
