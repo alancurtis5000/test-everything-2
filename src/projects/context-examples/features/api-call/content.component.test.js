@@ -1,7 +1,7 @@
 // We're using our own custom render function for redux conneceted components and not RTL's render
-import { render, cleanup, screen } from '../../tests/test.utils';
+import { render, cleanup, screen } from '@testing-library/react';
 import Content from './content.component';
-import * as fixtures from '../../redux/api-call/__test__/api-call.fixtures';
+import * as fixtures from './__test__/api-call.fixtures';
 
 describe('Content', () => {
   afterEach(cleanup);
