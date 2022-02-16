@@ -2,6 +2,13 @@
 import { render, cleanup, screen } from '@testing-library/react';
 import Content from './content.component';
 import * as fixtures from './__test__/api-call.fixtures';
+import { APICallContext } from '../../providers/api-call.provider';
+
+const wrappedInProvider = (preloadedState) => (
+  <APICallContext.Provider value={preloadedState}>
+    <Content />
+  </APICallContext.Provider>
+);
 
 describe('Content', () => {
   afterEach(cleanup);
@@ -18,30 +25,32 @@ describe('Content', () => {
   describe('Altered State', () => {
     it('should display loading screen', () => {
       const preloadedState = {
-        apiCall: { isLoaded: false, data: {}, error: '' },
+        isLoaded: false,
+        data: {},
+        error: '',
       };
-      render(<Content />, { preloadedState });
+      render(wrappedInProvider(preloadedState));
       expect(screen.getByText('...Loading...')).toBeDefined();
     });
     it('should display error', () => {
       const preloadedState = {
-        apiCall: { isLoaded: true, data: {}, error: 'This is an Error' },
+        isLoaded: true,
+        data: {},
+        error: 'This is an Error',
       };
-      render(<Content />, { preloadedState });
+      render(wrappedInProvider(preloadedState));
       expect(screen.getByText('This is an Error')).toBeDefined();
     });
     it('should display Content', () => {
       const { author, text } = fixtures.fakeApiCallSuccess.quotes[0];
       const preloadedState = {
-        apiCall: {
-          isLoaded: true,
-          data: { author, text },
-          error: '',
-        },
+        isLoaded: true,
+        data: { author, text },
+        error: '',
       };
-      render(<Content />, { preloadedState });
-      expect(screen.getByText(author)).toBeDefined();
-      expect(screen.getByText(text)).toBeDefined();
+      render(wrappedInProvider(preloadedState));
+      expect(screen.getByTestId('author')).toHaveTextContent(author);
+      expect(screen.getByTestId('quote')).toHaveTextContent(text);
     });
   });
 });

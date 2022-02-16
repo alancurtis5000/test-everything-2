@@ -4,9 +4,9 @@ import {
   screen,
   fireEvent,
   waitFor,
-} from '../../tests/test.utils';
+} from '@testing-library/react';
 import moxios from 'moxios';
-import * as fixtures from '../../redux/api-call/__test__/api-call.fixtures';
+import * as fixtures from './__test__/api-call.fixtures';
 import APICall from './api-call.component';
 
 describe('Api Call Component', () => {
