@@ -2,6 +2,8 @@ import React, { createContext, useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import axios from 'axios';
 
+// can I and should I right test for this?
+/* istanbul ignore next */
 export const APICallContext = createContext({
   data: {},
   isLoaded: false,
