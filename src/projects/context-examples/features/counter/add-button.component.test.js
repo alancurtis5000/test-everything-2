@@ -1,4 +1,3 @@
-// We're using our own custom render function for redux conneceted components and not RTL's render
 import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import AddButton from './add-button.component';
 import { CounterContext } from '../../providers/counter.provider';

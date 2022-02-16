@@ -1,10 +1,8 @@
-// We're using our own custom render function for redux conneceted components and not RTL's render
 import { render, cleanup, screen, fireEvent } from '@testing-library/react';
 import Counter from './counter.component';
 
 describe('Counter', () => {
   afterEach(cleanup);
-  // is there a way to override default state like preloaded state in redux?
   // don't need context provider because this is the comp that is wrapped in it.
   // Alan Note: with context it is encourage to right all your test where the Provider and Consumer are together
   // that way you don't have to wrap providers and mock functions. (mocked functions won't update context)
